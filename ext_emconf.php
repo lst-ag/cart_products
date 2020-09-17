@@ -24,7 +24,7 @@ $EM_CONF['cart_products'] = [
     'CGLcompliance_note' => null,
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-9.5.99',
+            'typo3' => '10.4.0-10.4.99',
             'cart' => '6.9.0'
         ],
         'conflicts' => [],
