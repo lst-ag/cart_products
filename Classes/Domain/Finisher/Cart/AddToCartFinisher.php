@@ -146,7 +146,7 @@ class AddToCartFinisher implements AddToCartFinisherInterface
     public function getProductFromRequest(
         Request $request,
         Cart $cart
-    ) {
+    ): array {
         $requestArguments = $request->getArguments();
         $taxClasses = $cart->getTaxClasses();
 
