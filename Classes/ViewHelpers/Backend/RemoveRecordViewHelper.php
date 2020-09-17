@@ -7,12 +7,14 @@ namespace Extcode\CartProducts\ViewHelpers\Backend;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
@@ -57,7 +59,8 @@ class RemoveRecordViewHelper extends AbstractViewHelper
             'uPT' => 1,
             'redirect' => GeneralUtility::getIndpEnv('REQUEST_URI')
         ];
-        $url = BackendUtility::getModuleUrl('tce_db', $urlParameters);
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $url = $uriBuilder->buildUriFromRoute('tce_db', $urlParameters);
 
         return '<a class="btn btn-default t3js-modal-trigger" href="' . htmlspecialchars($url) . '"'
             . ' title="' . htmlspecialchars($GLOBALS['LANG']->sL('LLL:EXT:cart_products/Resources/Private/Language/locallang_be.xlf:tx_cartproducts.module.products.action.delete_record.title')) . '"'
