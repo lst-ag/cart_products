@@ -6,13 +6,11 @@ use Extcode\Cart\Domain\Finisher\Cart\AddToCartFinisherInterface;
 use Extcode\Cart\Domain\Model\Cart\Cart;
 use Extcode\Cart\Domain\Model\Cart\Product;
 use Extcode\Cart\Domain\Model\Dto\AvailabilityResponse;
-use Extcode\CartProducts\Domain\Repository\Product\ProductRepository;
 use Extcode\CartProducts\Utility\ProductUtility;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Request;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -24,16 +22,34 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 class AddToCartFinisher implements AddToCartFinisherInterface
 {
     /**
-     * @var ObjectManager
+     * Object manager
+     *
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     */
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
+
+    /**
      * Product Repository
      *
-     * @var ProductRepository
+     * @var \Extcode\CartProducts\Domain\Repository\Product\ProductRepository
      */
     protected $productRepository;
+
+    /**
+     * @param \Extcode\CartProducts\Domain\Repository\Product\ProductRepository $productRepository
+     */
+    public function injectProductRepository(\Extcode\CartProducts\Domain\Repository\Product\ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
 
     /**
      * @param Request $request
@@ -49,8 +65,6 @@ class AddToCartFinisher implements AddToCartFinisherInterface
         Cart $cart,
         string $mode = 'update'
     ) : AvailabilityResponse {
-        $this->objectManager = new ObjectManager();
-
         /** @var AvailabilityResponse $availabilityResponse */
         $availabilityResponse = GeneralUtility::makeInstance(
             AvailabilityResponse::class
@@ -59,9 +73,6 @@ class AddToCartFinisher implements AddToCartFinisherInterface
         if ($cartProduct->getProductType() != 'CartProducts') {
             return $availabilityResponse;
         }
-        $this->productRepository = $this->objectManager->get(
-            ProductRepository::class
-        );
 
         $querySettings = $this->productRepository->createQuery()->getQuerySettings();
         $querySettings->setRespectStoragePage(false);
@@ -155,8 +166,6 @@ class AddToCartFinisher implements AddToCartFinisherInterface
         if (!empty($errors)) {
             return [$errors, []];
         }
-
-        $this->objectManager = new ObjectManager();
 
         $productUtility = $this->objectManager->get(
             ProductUtility::class
