@@ -14,15 +14,14 @@ namespace Extcode\CartProducts\ViewHelpers\Product;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 /**
  * If SpecialPrice Available ViewHelper
  *
  * @author Daniel Lorenz <ext.cart@extco.de>
  */
-class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper implements CompilableInterface
+class IfBestSpecialPriceAvailableViewHelper extends AbstractConditionViewHelper
 {
     /**
      * Object Manager

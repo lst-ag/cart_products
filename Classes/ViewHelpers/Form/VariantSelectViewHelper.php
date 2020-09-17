@@ -20,7 +20,7 @@ namespace Extcode\CartProducts\ViewHelpers\Form;
  *
  * @author Daniel Lorenz <ext.cart@extco.de>
  */
-class VariantSelectViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class VariantSelectViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     /**
      * Output is escaped already. We must not escape children, to avoid double encoding.

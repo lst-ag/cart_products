@@ -14,7 +14,7 @@ namespace Extcode\CartProducts\ViewHelpers\Traversable;
  *
  * The TYPO3 project - inspiring people to share!
  */
-class ExtractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class ExtractViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
     /**
