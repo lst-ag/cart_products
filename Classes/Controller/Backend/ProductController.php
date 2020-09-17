@@ -8,7 +8,10 @@ namespace Extcode\CartProducts\Controller\Backend;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
@@ -172,7 +175,9 @@ class ProductController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->view->assign('searchArguments', $this->searchArguments);
         $this->view->assign('products', $products);
 
-        $this->view->assign('returnUrl', rawurlencode(BackendUtility::getModuleUrl('Cart_CartProductsProducts')));
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $url = $uriBuilder->buildUriFromRoute('Cart_CartProductsProducts');
+        $this->view->assign('returnUrl', rawurlencode($url));
     }
 
     /**
