@@ -10,9 +10,9 @@ call_user_func(function ($extensionKey) {
      * Register Backend Modules
      */
     if (TYPO3_MODE === 'BE') {
-        if (!isset($TBE_MODULES['Cart'])) {
+        if (!isset($GLOBALS['TBE_MODULES']['Cart'])) {
             $temp_TBE_MODULES = [];
-            foreach ($TBE_MODULES as $key => $val) {
+            foreach ($GLOBALS['TBE_MODULES'] as $key => $val) {
                 if ($key == 'file') {
                     $temp_TBE_MODULES[$key] = $val;
                     $temp_TBE_MODULES['Cart'] = '';
@@ -21,7 +21,7 @@ call_user_func(function ($extensionKey) {
                 }
             }
 
-            $TBE_MODULES = $temp_TBE_MODULES;
+            $GLOBALS['TBE_MODULES'] = $temp_TBE_MODULES;
         }
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
