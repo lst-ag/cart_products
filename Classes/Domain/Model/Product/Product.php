@@ -1317,4 +1317,15 @@ class Product extends \Extcode\CartProducts\Domain\Model\Product\AbstractProduct
     {
         $this->tags = $tags;
     }
+
+    /**
+     * Get uid for ordering.
+     *
+     * @return int
+     */
+    public function getUidForOrdering(): int
+    {
+        return $this->_localizedUid ?? $this->uid;
+    }
+
 }
